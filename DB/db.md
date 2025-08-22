@@ -445,3 +445,54 @@
     - All leaf are at the same level.
     - M order B tree means, each node can have at most M childrens.
     - and M - 1 keys per node.
+
+
+# BST vs B-Tree
+
+A **BST (Binary Search Tree)** and a **B-Tree** both store data in sorted order, but they are designed for different use cases.  
+The main reason to use a **B-Tree** over a **BST** is **performance in disk-based or large data systems**.
+
+---
+
+## 🔹 Binary Search Tree (BST)
+
+- Each node has at most **2 children**.  
+- **Operations** (search, insert, delete):  
+  - **O(log n)** in best/average case (if balanced).  
+  - **O(n)** in worst case (if skewed/unbalanced).  
+- Stored usually in **memory (RAM)**, where accessing nodes is cheap (constant time).  
+
+---
+
+## 🔹 B-Tree
+
+- A **generalization of BST** → each node can have **many keys** and **many children** (not limited to 2).  
+- Nodes are designed to match the **block size of disks/pages** in databases.  
+- Each read/write loads an entire **block**, reducing **disk I/O**.  
+- **Operations** (search, insert, delete): **O(log n)**, but with **fewer disk reads**.  
+- Always kept **balanced** (height is low).  
+
+---
+
+## ⚡ Why B-Tree over BST?
+
+1. **Disk I/O minimization**  
+   - Accessing disk is **millions of times slower** than RAM.  
+   - BST may require traversing many small nodes → many disk reads.  
+   - B-Tree packs many keys in one node → fewer disk accesses.  
+
+2. **Guaranteed balance**  
+   - B-Tree is **always balanced** (low height).  
+   - BST can become skewed like a linked list unless extra balancing (AVL, Red-Black).  
+
+3. **Databases & File Systems**  
+   - Used in **databases, indexing, and file systems** (NTFS, EXT4, HFS+).  
+   - Optimized for **range queries** and **sequential access**.  
+
+---
+
+## 👉 In short
+
+- **Use BST** when data fits in memory and you want simplicity.  
+- **Use B-Tree** when data is on **disk/storage** and you need efficient indexing with **minimal disk reads**.  
+
