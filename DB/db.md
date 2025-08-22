@@ -494,5 +494,64 @@ The main reason to use a **B-Tree** over a **BST** is **performance in disk-base
 ## 👉 In short
 
 - **Use BST** when data fits in memory and you want simplicity.  
-- **Use B-Tree** when data is on **disk/storage** and you need efficient indexing with **minimal disk reads**.  
+- **Use B-Tree** when data is on **disk/storage** and you need efficient indexing with **minimal disk reads**. 
+
+
+# 🔹 Difference between B-Tree and B+ Tree
+
+---
+
+## 1. Where keys and data are stored
+- **B-Tree**  
+  - Both **keys + data** (records/pointers to records) can be stored in **internal nodes** and **leaf nodes**.  
+  - Searching might **stop at an internal node**.  
+
+- **B+ Tree**  
+  - Internal nodes store **only keys** (indexing), **no data**.  
+  - Leaf nodes store **all actual data/record pointers**.  
+  - All leaves are **linked together** (linked list).  
+
+---
+
+## 2. Search Efficiency
+- **B-Tree**: Search may **stop early** at internal nodes → not consistent.  
+- **B+ Tree**: Always goes to the **leaf level** → predictable search time.  
+
+---
+
+## 3. Range Queries
+- **B-Tree**: No direct way to scan sequentially → need **in-order traversal**.  
+- **B+ Tree**: Leaves are linked → **fast sequential access** and **range queries** (e.g., `WHERE age BETWEEN 20 AND 30`).  
+
+---
+
+## 4. Space Utilization
+- **B-Tree**: Internal nodes hold both **keys + data** → fewer keys per node → **larger height**.  
+- **B+ Tree**: Internal nodes hold **only keys** → more branching factor → **smaller height**, fewer disk I/Os.  
+
+---
+
+## ⚡ Why DBMS and File Systems Prefer B+ Tree
+- **Better disk read efficiency** → shorter, broader tree (internal nodes are smaller).  
+- **Fast range queries** → leaf nodes are linked list.  
+- **Consistent access time** → every search goes to leaf.  
+- **Efficient sequential scans** of entire table/index.  
+
+---
+
+## 🔹 Example
+Suppose **block size = 4 KB**:  
+- **B-Tree**: Internal node stores **keys + record pointers**, so it may hold ~50 keys.  
+- **B+ Tree**: Internal node stores **only keys**, so it can hold ~200+ keys.  
+
+👉 Tree height shrinks a lot → fewer disk accesses.  
+
+---
+
+## ✅ In short
+We use **B+ Tree** over **B-Tree** because it gives:  
+- Smaller height (**fewer disk I/Os**)  
+- Better **range queries** (linked leaves)  
+- **Predictable search time** (always goes to leaves)  
+ 
 
