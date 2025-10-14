@@ -26,6 +26,8 @@ Meet the brilliant minds who make this project possible. From coding wizards to 
   </div>
 </div>
 
+
+
 <div style="border-radius: 1rem; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 250px; display: flex; flex-direction: column; align-items: center; text-align: center;">
   <img src="" alt="Nikhil Sahani" style="border-radius: 50%; width: 120px; height: 120px; object-fit: cover; margin-bottom: 1rem;">
   <h3>Nikhil Sahani</h3>
