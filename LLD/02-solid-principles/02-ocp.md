@@ -38,6 +38,13 @@ mindmap
 
 Let's look at a classic example that violates OCP:
 
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
+
 ```java
 // ❌ VIOLATION: Need to modify existing code for new features
 public class DiscountCalculator {
@@ -58,6 +65,38 @@ public class DiscountCalculator {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+// ❌ VIOLATION: Need to modify existing code for new features
+class DiscountCalculator {
+public:
+    double calculateDiscount(const string& customerType, double amount) {
+        if (customerType == "REGULAR") {
+            return amount * 0.05;
+        } else if (customerType == "PREMIUM") {
+            return amount * 0.10;
+        } else if (customerType == "VIP") {
+            return amount * 0.15;
+        } else if (customerType == "GOLD") { // ❌ New feature requires modification
+            return amount * 0.20;
+        } else if (customerType == "PLATINUM") {
+            return amount * 0.25;
+        }
+        return 0;
+    }
+};
+```
+
+</template>
+</CodeTabs>
+
 ### Problems with This Design
 
 1. **Modification Required**: Every new customer type requires changing existing code
@@ -72,6 +111,13 @@ Let's refactor using abstraction and polymorphism:
 
 ### 1. Create Discount Strategy Interface
 
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
+
 ```java
 // ✅ GOOD: Abstract interface for discount calculation
 public interface DiscountStrategy {
@@ -80,7 +126,38 @@ public interface DiscountStrategy {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+#include <map>
+#include <memory>
+#include <stdexcept>
+#include <set>
+using namespace std;
+
+class DiscountStrategy {
+public:
+    virtual double calculateDiscount(double amount) const = 0;
+    virtual string getCustomerType() const = 0;
+    virtual ~DiscountStrategy() = default;
+};
+```
+
+</template>
+</CodeTabs>
+
 ### 2. Implement Concrete Strategies
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // ✅ GOOD: Regular customer discount strategy
@@ -123,7 +200,53 @@ public class VipCustomerDiscount implements DiscountStrategy {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+class RegularCustomerDiscount : public DiscountStrategy {
+public:
+    double calculateDiscount(double amount) const override {
+        return amount * 0.05;
+    }
+    string getCustomerType() const override {
+        return "REGULAR";
+    }
+};
+
+class PremiumCustomerDiscount : public DiscountStrategy {
+public:
+    double calculateDiscount(double amount) const override {
+        return amount * 0.10;
+    }
+    string getCustomerType() const override {
+        return "PREMIUM";
+    }
+};
+
+class VipCustomerDiscount : public DiscountStrategy {
+public:
+    double calculateDiscount(double amount) const override {
+        return amount * 0.15;
+    }
+    string getCustomerType() const override {
+        return "VIP";
+    }
+};
+```
+
+</template>
+</CodeTabs>
+
 ### 3. Context Class Using Strategy
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // ✅ GOOD: Calculator that works with any discount strategy
@@ -156,9 +279,56 @@ public class DiscountCalculator {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+class DiscountCalculator {
+    map<string, unique_ptr<DiscountStrategy>> strategies;
+public:
+    DiscountCalculator() {
+        registerStrategy(make_unique<RegularCustomerDiscount>());
+        registerStrategy(make_unique<PremiumCustomerDiscount>());
+        registerStrategy(make_unique<VipCustomerDiscount>());
+    }
+
+    void registerStrategy(unique_ptr<DiscountStrategy> strategy) {
+        string key = strategy->getCustomerType();
+        strategies[key] = move(strategy);
+    }
+
+    double calculateDiscount(const string& customerType, double amount) const {
+        auto it = strategies.find(customerType);
+        if (it == strategies.end()) {
+            throw invalid_argument("Unknown customer type: " + customerType);
+        }
+        return it->second->calculateDiscount(amount);
+    }
+
+    set<string> getSupportedCustomerTypes() const {
+        set<string> keys;
+        for (auto& kv : strategies)
+            keys.insert(kv.first);
+        return keys;
+    }
+};
+```
+
+</template>
+
+</CodeTabs>
+
 ## 🚀 Adding New Features Without Modification
 
 Now we can add new customer types **without modifying existing code**:
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // ✅ NEW: Gold customer discount - NO modification to existing code needed!
@@ -214,6 +384,51 @@ public class CorporateCustomerDiscount implements DiscountStrategy {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+class GoldCustomerDiscount : public DiscountStrategy {
+public:
+    double calculateDiscount(double amount) const override {
+        return amount * 0.20;
+    }
+    string getCustomerType() const override {
+        return "GOLD";
+    }
+};
+
+class PlatinumCustomerDiscount : public DiscountStrategy {
+public:
+    double calculateDiscount(double amount) const override {
+        if (amount > 10000) return amount * 0.30;
+        else if (amount > 5000) return amount * 0.25;
+        return amount * 0.20;
+    }
+    string getCustomerType() const override {
+        return "PLATINUM";
+    }
+};
+
+class CorporateCustomerDiscount : public DiscountStrategy {
+    bool isHolidaySeason;
+public:
+    CorporateCustomerDiscount(bool isHoliday) : isHolidaySeason(isHoliday) {}
+    double calculateDiscount(double amount) const override {
+        double base = amount * 0.18;
+        return isHolidaySeason ? base * 1.5 : base;
+    }
+    string getCustomerType() const override {
+        return "CORPORATE";
+    }
+};
+```
+
+</template>
+
+</CodeTabs>
+
 ## 🏗️ Class Diagram After OCP
 
 ```mermaid
@@ -267,6 +482,13 @@ classDiagram
 
 ## 🎯 Using the OCP Solution
 
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
+
 ```java
 public class ECommerceSystem {
     public static void main(String[] args) {
@@ -292,11 +514,49 @@ public class ECommerceSystem {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+int main() {
+    DiscountCalculator calculator;
+
+    calculator.registerStrategy(make_unique<GoldCustomerDiscount>());
+    calculator.registerStrategy(make_unique<PlatinumCustomerDiscount>());
+    calculator.registerStrategy(make_unique<CorporateCustomerDiscount>(true));
+
+    double amount = 1000.0;
+
+    cout << "Regular: $" << calculator.calculateDiscount("REGULAR", amount) << endl;
+    cout << "Premium: $" << calculator.calculateDiscount("PREMIUM", amount) << endl;
+    cout << "VIP: $" << calculator.calculateDiscount("VIP", amount) << endl;
+    cout << "Gold: $" << calculator.calculateDiscount("GOLD", amount) << endl;
+    cout << "Platinum: $" << calculator.calculateDiscount("PLATINUM", amount) << endl;
+    cout << "Corporate: $" << calculator.calculateDiscount("CORPORATE", amount) << endl;
+
+    cout << "\nSupported customer types: ";
+    for (auto& type : calculator.getSupportedCustomerTypes())
+        cout << type << " ";
+    cout << endl;
+}
+```
+
+</template>
+</CodeTabs>
+
 ## 🎨 More OCP Examples
 
 ### Example 1: Shape Area Calculator
 
 #### ❌ Violation
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 public class AreaCalculator {
@@ -316,7 +576,38 @@ public class AreaCalculator {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <typeinfo>
+#include <cmath>
+
+class Circle { public: double r; Circle(double radius): r(radius) {} };
+class Rectangle { public: double w, h; Rectangle(double w_, double h_): w(w_), h(h_) {} };
+class Triangle { public: double b, h; Triangle(double b_, double h_): b(b_), h(h_) {} };
+
+class AreaCalculator {
+public:
+    double calculateArea(const Circle& c) { return M_PI * c.r * c.r; }
+    double calculateArea(const Rectangle& r) { return r.w * r.h; }
+    double calculateArea(const Triangle& t) { return 0.5 * t.b * t.h; } // ❌ New code modification
+};
+```
+
+</template>
+
+</CodeTabs>
+
 #### ✅ Solution
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // Abstract shape interface
@@ -375,9 +666,65 @@ public class AreaCalculator {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+class Shape {
+public:
+    virtual double calculateArea() const = 0;
+    virtual ~Shape() = default;
+};
+
+class CircleShape : public Shape {
+    double radius;
+public:
+    CircleShape(double r): radius(r) {}
+    double calculateArea() const override { return M_PI * radius * radius; }
+};
+
+class RectangleShape : public Shape {
+    double width, height;
+public:
+    RectangleShape(double w, double h): width(w), height(h) {}
+    double calculateArea() const override { return width * height; }
+};
+
+class TriangleShape : public Shape {
+    double base, height;
+public:
+    TriangleShape(double b, double h): base(b), height(h) {}
+    double calculateArea() const override { return 0.5 * base * height; }
+};
+
+#include <vector>
+#include <numeric>
+
+class AreaCalculator {
+public:
+    double calculateTotalArea(const vector<unique_ptr<Shape>>& shapes) const {
+        double total = 0;
+        for (auto& s : shapes) total += s->calculateArea();
+        return total;
+    }
+};
+```
+
+</template>
+
+</CodeTabs>
+
 ### Example 2: Payment Processing
 
 #### ❌ Violation
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 public class PaymentProcessor {
@@ -396,7 +743,51 @@ public class PaymentProcessor {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class PaymentProcessor {
+public:
+    void processPayment(const string& paymentType, double amount) {
+        if (paymentType == "CREDIT_CARD") {
+            // Credit card processing logic
+            cout << "Processing credit card payment: $" << amount << '\n';
+        } else if (paymentType == "PAYPAL") {
+            // PayPal processing logic
+            cout << "Processing PayPal payment: $" << amount << '\n';
+        } else if (paymentType == "CRYPTO") { // ❌ NEW: Modification required
+            // Cryptocurrency processing logic
+            cout << "Processing crypto payment: $" << amount << '\n';
+        }
+    }
+};
+
+int main() {
+    PaymentProcessor p;
+    p.processPayment("CREDIT_CARD", 100.0);
+    p.processPayment("PAYPAL", 200.0);
+    p.processPayment("CRYPTO", 300.0);
+}
+```
+
+</template>
+
+</CodeTabs>
+
 #### ✅ Solution
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // Payment strategy interface
@@ -511,9 +902,98 @@ public class PaymentProcessor {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <map>
+#include <memory>
+#include <algorithm>
+
+class PaymentStrategy {
+public:
+    virtual void processPayment(double amount) const = 0;
+    virtual string getPaymentType() const = 0;
+    virtual bool isAvailable() const = 0;
+    virtual ~PaymentStrategy() = default;
+};
+
+class CreditCardPayment : public PaymentStrategy {
+    string cardNumber, expiry;
+public:
+    CreditCardPayment(string c, string e): cardNumber(c), expiry(e) {}
+    void processPayment(double amount) const override {
+        cout << "Processing credit card payment: $" << amount << endl;
+        cout << "Card ending: " << cardNumber.substr(cardNumber.size() - 4) << endl;
+    }
+    string getPaymentType() const override { return "CREDIT_CARD"; }
+    bool isAvailable() const override { return true; }
+};
+
+class PayPalPayment : public PaymentStrategy {
+    string email;
+public:
+    PayPalPayment(string e): email(e) {}
+    void processPayment(double amount) const override {
+        cout << "Processing PayPal payment: $" << amount << endl;
+        cout << "Account: " << email << endl;
+    }
+    string getPaymentType() const override { return "PAYPAL"; }
+    bool isAvailable() const override { return true; }
+};
+
+class CryptoPayment : public PaymentStrategy {
+    string wallet, coin;
+public:
+    CryptoPayment(string w, string c): wallet(w), coin(c) {}
+    void processPayment(double amount) const override {
+        cout << "Processing " << coin << " payment: $" << amount << endl;
+        cout << "Wallet: " << wallet << endl;
+    }
+    string getPaymentType() const override { return "CRYPTO"; }
+    bool isAvailable() const override { return true; }
+};
+
+class PaymentProcessor {
+    map<string, unique_ptr<PaymentStrategy>> methods;
+public:
+    void registerPayment(unique_ptr<PaymentStrategy> method) {
+        methods[method->getPaymentType()] = move(method);
+    }
+
+    void processPayment(const string& type, double amount) {
+        auto it = methods.find(type);
+        if (it == methods.end()) throw invalid_argument("Unsupported payment type: " + type);
+        if (!it->second->isAvailable()) throw runtime_error("Payment method not available");
+        it->second->processPayment(amount);
+    }
+
+    vector<string> getAvailableMethods() const {
+        vector<string> result;
+        for (auto& m : methods)
+            if (m.second->isAvailable()) result.push_back(m.first);
+        return result;
+    }
+};
+```
+
+</template>
+
+</CodeTabs>
+
 ## 🛠️ OCP Implementation Patterns
 
 ### 1. Strategy Pattern
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // Context class that uses strategies
@@ -544,7 +1024,82 @@ public class LowerCaseFormatter implements FormattingStrategy {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+#include <memory>
+#include <algorithm>
+using namespace std;
+
+// Strategy interface
+class FormattingStrategy {
+public:
+    virtual string format(const string& text) const = 0;
+    virtual ~FormattingStrategy() = default;
+};
+
+// Concrete strategy — UpperCase
+class UpperCaseFormatter : public FormattingStrategy {
+public:
+    string format(const string& text) const override {
+        string result = text;
+        transform(result.begin(), result.end(), result.begin(), ::toupper);
+        return result;
+    }
+};
+
+// Concrete strategy — LowerCase
+class LowerCaseFormatter : public FormattingStrategy {
+public:
+    string format(const string& text) const override {
+        string result = text;
+        transform(result.begin(), result.end(), result.begin(), ::tolower);
+        return result;
+    }
+};
+
+// Context class that uses strategies
+class TextFormatter {
+    unique_ptr<FormattingStrategy> strategy;
+public:
+    void setFormattingStrategy(unique_ptr<FormattingStrategy> s) {
+        strategy = move(s);
+    }
+
+    string format(const string& text) const {
+        if (!strategy) throw runtime_error("No formatting strategy set!");
+        return strategy->format(text);
+    }
+};
+
+// Example usage
+int main() {
+    TextFormatter formatter;
+
+    formatter.setFormattingStrategy(make_unique<UpperCaseFormatter>());
+    cout << "Upper: " << formatter.format("Open Closed Principle") << endl;
+
+    formatter.setFormattingStrategy(make_unique<LowerCaseFormatter>());
+    cout << "Lower: " << formatter.format("Open Closed Principle") << endl;
+}
+```
+
+</template>
+
+</CodeTabs>
+
 ### 2. Template Method Pattern
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // Abstract base class defining the algorithm template
@@ -581,7 +1136,107 @@ public class JSONDataProcessor extends DataProcessor {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Abstract base class defining the algorithm template
+class DataProcessor {
+public:
+    // Template method - defines the algorithm structure
+    void processData(const string& data) final {
+        string cleanedData = cleanData(data);
+        string validatedData = validateData(cleanedData);
+        string transformedData = transformData(validatedData);
+        saveData(transformedData);
+    }
+
+protected:
+    // Steps to be implemented by subclasses
+    virtual string cleanData(const string& data) = 0;
+    virtual string validateData(const string& data) = 0;
+    virtual string transformData(const string& data) = 0;
+    virtual void saveData(const string& data) = 0;
+
+    virtual ~DataProcessor() = default;
+};
+
+// ✅ NEW: CSVDataProcessor subclass
+class CSVDataProcessor : public DataProcessor {
+protected:
+    string cleanData(const string& data) override {
+        cout << "Cleaning CSV data...\n";
+        return data;
+    }
+
+    string validateData(const string& data) override {
+        cout << "Validating CSV data...\n";
+        return data;
+    }
+
+    string transformData(const string& data) override {
+        cout << "Transforming CSV data...\n";
+        return data;
+    }
+
+    void saveData(const string& data) override {
+        cout << "Saving CSV data...\n";
+    }
+};
+
+// ✅ NEW: JSONDataProcessor subclass
+class JSONDataProcessor : public DataProcessor {
+protected:
+    string cleanData(const string& data) override {
+        cout << "Cleaning JSON data...\n";
+        return data;
+    }
+
+    string validateData(const string& data) override {
+        cout << "Validating JSON data...\n";
+        return data;
+    }
+
+    string transformData(const string& data) override {
+        cout << "Transforming JSON data...\n";
+        return data;
+    }
+
+    void saveData(const string& data) override {
+        cout << "Saving JSON data...\n";
+    }
+};
+
+// Example usage
+int main() {
+    CSVDataProcessor csvProcessor;
+    JSONDataProcessor jsonProcessor;
+
+    cout << "---- Processing CSV ----\n";
+    csvProcessor.processData("CSV sample data");
+
+    cout << "\n---- Processing JSON ----\n";
+    jsonProcessor.processData("JSON sample data");
+}
+```
+
+</template>
+
+</CodeTabs>
+
 ### 3. Plugin Architecture
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // Plugin interface
@@ -628,6 +1283,94 @@ public class SecurityScanPlugin implements Plugin {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <memory>
+#include <algorithm>
+using namespace std;
+
+// Plugin interface
+class Plugin {
+public:
+    virtual string getName() const = 0;
+    virtual string getVersion() const = 0;
+    virtual void execute() const = 0;
+    virtual bool isEnabled() const = 0;
+    virtual ~Plugin() = default;
+};
+
+// Plugin Manager
+class PluginManager {
+    vector<unique_ptr<Plugin>> plugins;
+
+public:
+    void registerPlugin(unique_ptr<Plugin> plugin) {
+        cout << "Registered plugin: " << plugin->getName() << endl;
+        plugins.push_back(move(plugin));
+    }
+
+    void executePlugins() const {
+        for (const auto& plugin : plugins) {
+            if (plugin->isEnabled()) {
+                plugin->execute();
+            }
+        }
+    }
+
+    vector<const Plugin*> getPlugins() const {
+        vector<const Plugin*> list;
+        for (const auto& p : plugins) list.push_back(p.get());
+        return list;
+    }
+};
+
+// ✅ NEW: Backup Plugin (no modification to manager)
+class BackupPlugin : public Plugin {
+public:
+    string getName() const override { return "Backup Plugin"; }
+    string getVersion() const override { return "1.0"; }
+    bool isEnabled() const override { return true; }
+    void execute() const override { cout << "Running backup..." << endl; }
+};
+
+// ✅ NEW: Security Scan Plugin (no modification to manager)
+class SecurityScanPlugin : public Plugin {
+public:
+    string getName() const override { return "Security Scanner"; }
+    string getVersion() const override { return "2.1"; }
+    bool isEnabled() const override { return true; }
+    void execute() const override { cout << "Running security scan..." << endl; }
+};
+
+// Example usage
+int main() {
+    PluginManager manager;
+
+    manager.registerPlugin(make_unique<BackupPlugin>());
+    manager.registerPlugin(make_unique<SecurityScanPlugin>());
+
+    cout << "\nExecuting enabled plugins:\n";
+    manager.executePlugins();
+
+    cout << "\nLoaded Plugins:\n";
+    for (const Plugin* p : manager.getPlugins()) {
+        cout << "- " << p->getName() << " v" << p->getVersion() << endl;
+    }
+
+    return 0;
+}
+```
+
+</template>
+
+</CodeTabs>
+
 ## 🔍 How to Identify OCP Violations
 
 ### Questions to Ask
@@ -648,6 +1391,13 @@ public class SecurityScanPlugin implements Plugin {
 ## 🎯 Benefits of Following OCP
 
 ### 1. **Stability**
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 // ✅ Existing code remains stable when adding new features
@@ -670,6 +1420,83 @@ public class SlackLogHandler implements LogHandler {
     }
 }
 ```
+
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <memory>
+using namespace std;
+
+// LogHandler interface
+class LogHandler {
+public:
+    virtual void handle(const string& message) const = 0;
+    virtual ~LogHandler() = default;
+};
+
+// ✅ Existing Logger class — open for extension, closed for modification
+class Logger {
+    vector<unique_ptr<LogHandler>> handlers;
+
+public:
+    void addHandler(unique_ptr<LogHandler> handler) {
+        handlers.push_back(move(handler));  // No modification to add new handlers
+    }
+
+    void log(const string& message) const {
+        for (const auto& handler : handlers) {
+            handler->handle(message);
+        }
+    }
+};
+
+// ✅ NEW: Console log handler
+class ConsoleLogHandler : public LogHandler {
+public:
+    void handle(const string& message) const override {
+        cout << "[Console] " << message << endl;
+    }
+};
+
+// ✅ NEW: File log handler
+class FileLogHandler : public LogHandler {
+public:
+    void handle(const string& message) const override {
+        // Example simulation (in real-world, you'd write to a file)
+        cout << "[File] Logging message to file: " << message << endl;
+    }
+};
+
+// ✅ NEW: Slack log handler — no modification to Logger class
+class SlackLogHandler : public LogHandler {
+public:
+    void handle(const string& message) const override {
+        // Simulate sending message to Slack
+        cout << "[Slack] Sending to Slack channel: " << message << endl;
+    }
+};
+
+// Example usage
+int main() {
+    Logger logger;
+
+    logger.addHandler(make_unique<ConsoleLogHandler>());
+    logger.addHandler(make_unique<FileLogHandler>());
+    logger.addHandler(make_unique<SlackLogHandler>()); // Added new handler without changing Logger
+
+    logger.log("System started successfully!");
+    logger.log("User logged in!");
+}
+```
+
+</template>
+
+</CodeTabs>
 
 ### 2. **Easier Testing**
 
@@ -749,6 +1576,13 @@ public interface UserRepository {
 
 ### Example Refactoring
 
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
+
 ```java
 // BEFORE: Violation
 public class ReportGenerator {
@@ -782,11 +1616,59 @@ public class ReportGenerator {
 }
 ```
 
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+struct Data {
+    string content;
+};
+
+// ❌ Violation: New formats require modifying this class
+class ReportGenerator {
+public:
+    void generateReport(const string& type, const vector<Data>& data) {
+        if (type == "PDF") {
+            cout << "Generating PDF report..." << endl;
+            // Generate PDF logic
+        } else if (type == "Excel") {
+            cout << "Generating Excel report..." << endl;
+            // Generate Excel logic
+        }
+        // ❌ Adding CSV or HTML would require editing this class again
+    }
+};
+
+int main() {
+    ReportGenerator generator;
+    vector<Data> dataset = {{"Sample Data 1"}, {"Sample Data 2"}};
+    generator.generateReport("PDF", dataset);
+    generator.generateReport("Excel", dataset);
+}
+```
+
+</template>
+
+</CodeTabs>
+
 ## 🎓 Practice Exercise
 
 ### Exercise: Refactor the Notification System
 
 Here's a system that violates OCP. Can you refactor it?
+
+<CodeTabs :languages="[
+{name : 'C++', slot : 'cpp'},
+{name : 'Java', slot : 'java'}
+]">
+
+<template #java>
 
 ```java
 public class NotificationService {
@@ -815,6 +1697,66 @@ public class NotificationService {
     }
 }
 ```
+
+</template>
+
+<template #cpp>
+
+```cpp
+#include <iostream>
+#include <string>
+#include <regex>
+using namespace std;
+
+class NotificationService {
+public:
+    void sendNotification(const string& type, const string& message, const string& recipient) {
+        if (type == "EMAIL") {
+            // Send email
+            cout << "Email sent to " << recipient << ": " << message << endl;
+        } else if (type == "SMS") {
+            // Send SMS
+            cout << "SMS sent to " << recipient << ": " << message << endl;
+        } else if (type == "PUSH") {
+            // Send push notification
+            cout << "Push notification sent to " << recipient << ": " << message << endl;
+        }
+    }
+
+    bool isValidRecipient(const string& type, const string& recipient) {
+        if (type == "EMAIL") {
+            return recipient.find('@') != string::npos;
+        } else if (type == "SMS") {
+            // Check if it's exactly 10 digits
+            return regex_match(recipient, regex("\\d{10}"));
+        } else if (type == "PUSH") {
+            return !recipient.empty();
+        }
+        return false;
+    }
+};
+
+int main() {
+    NotificationService notifier;
+
+    string email = "rkroy@example.com";
+    string phone = "9876543210";
+    string device = "UserDevice123";
+
+    if (notifier.isValidRecipient("EMAIL", email))
+        notifier.sendNotification("EMAIL", "Welcome to our platform!", email);
+
+    if (notifier.isValidRecipient("SMS", phone))
+        notifier.sendNotification("SMS", "Your OTP is 1234", phone);
+
+    if (notifier.isValidRecipient("PUSH", device))
+        notifier.sendNotification("PUSH", "You have a new message!", device);
+}
+```
+
+</template>
+
+</CodeTabs>
 
 ### Solution Approach
 

@@ -1,20 +1,40 @@
 name: Auto Assign Reviewer
 
 on:
-    pull_request:
-        types: [opened, reopened]
+  pull_request:
+    types: [opened, reopened]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull Request number to assign reviewers to'
+        required: true
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
-    assign-reviewer:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Assign reviewer
-              uses: actions/github-script@v7
-              with:
-                  script: |
-                      github.rest.pulls.requestReviewers({
-                        owner: context.repo.owner,
-                        repo: context.repo.repo,
-                        pull_number: context.issue.number,
-                        reviewers: ['raj8664']
-                      });
+  assign-reviewer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign reviewer
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.payload.pull_request
+              ? context.payload.pull_request.number
+              : inputs.pr_number; // ✅ FIXED
+
+            if (!prNumber) {
+              core.setFailed('❌ No pull request number provided.');
+              return;
+            }
+
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              reviewers: ['raj8664']
+            });
+
+            console.log(`✅ Reviewer assigned to PR #${prNumber}`);

@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-A comprehensive, well-organized collection of notes, code implementations, solutions, and study materials for various computer science subjects. This repository serves as a one-stop resource for students, professionals, and anyone preparing for technical interviews, exams, or looking to strengthen their CS fundamentals.
+An open-source learning platform designed to guide you through your entire computer science journey. We bridge the gap between academic theory and real-world interviews by providing everything in one place: curated notes, previous year's questions (PYQs), LeetCode solutions, and authentic interview experiences from top tech companies.
 </p>
 
 <div align = "center">
@@ -61,16 +61,16 @@ Prep/
 
 ## Screenshots
 
-|                                                                                                                             |                                                                                                                             |
-| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| ![Screenshot 1](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118415/Screenshot_21-Oct_23-49-54_17462_ubrq7d.png)  | ![Screenshot 2](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118415/Screenshot_21-Oct_23-50-06_2136_yoz7mh.png)   |
-| ![Screenshot 3](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-52-53_6155_w7v2zk.png)   | ![Screenshot 4](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-53-05_7044_fkrre9.png)   |
-| ![Screenshot 5](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-53-28_17285_zarpss.png)  | ![Screenshot 6](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-53-41_18789_rns862.png)  |
-| ![Screenshot 7](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118414/Screenshot_21-Oct_23-53-58_26745_sepjfs.png)  | ![Screenshot 8](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118634/Screenshot_22-Oct_13-05-08_28827_xeh4vs.png)  |
-| ![Screenshot 9](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118592/Screenshot_22-Oct_13-05-24_1934_mqppvb.png)   | ![Screenshot 10](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-51-55_5495_sh02vf.png)  |
-| ![Screenshot 11](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118412/Screenshot_21-Oct_23-52-09_23253_z4zacn.png) | ![Screenshot 12](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761121056/Screenshot_22-Oct_13-47-14_9281_pojbcy.png)  |
-| ![Screenshot 13](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761121400/Screenshot_22-Oct_13-53-02_28483_potnof.png) | ![Screenshot 14](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118415/Screenshot_21-Oct_23-50-50_17766_u7rl4r.png) |
-| ![Screenshot 15](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118416/Screenshot_21-Oct_23-51-04_507_pvaj2k.png)   | ![Screenshot 16](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-52-24_16430_ynfxd9.png) |
+|                                                                                                                             |                                                                                                                                |
+| --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ![Screenshot 1](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118415/Screenshot_21-Oct_23-49-54_17462_ubrq7d.png)  | ![Screenshot 2](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118415/Screenshot_21-Oct_23-50-06_2136_yoz7mh.png)      |
+| ![Screenshot 3](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-52-53_6155_w7v2zk.png)   | ![Screenshot 4](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-53-05_7044_fkrre9.png)      |
+| ![Screenshot 5](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-53-28_17285_zarpss.png)  | ![Screenshot 6](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-53-41_18789_rns862.png)     |
+| ![Screenshot 7](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118414/Screenshot_21-Oct_23-53-58_26745_sepjfs.png)  | ![Screenshot 8](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118634/Screenshot_22-Oct_13-05-08_28827_xeh4vs.png)     |
+| ![Screenshot 9](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118592/Screenshot_22-Oct_13-05-24_1934_mqppvb.png)   | ![Screenshot 10](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-51-55_5495_sh02vf.png)     |
+| ![Screenshot 11](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118412/Screenshot_21-Oct_23-52-09_23253_z4zacn.png) | ![Screenshot 12](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761121056/Screenshot_22-Oct_13-47-14_9281_pojbcy.png)     |
+| ![Screenshot 13](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761121400/Screenshot_22-Oct_13-53-02_28483_potnof.png) | ![Screenshot 14](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118415/Screenshot_21-Oct_23-50-50_17766_u7rl4r.png)    |
+| ![Screenshot 15](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118416/Screenshot_21-Oct_23-51-04_507_pvaj2k.png)   | ![Screenshot 16](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-52-24_16430_ynfxd9.png)    |
 | ![Screenshot 17](https://res.cloudinary.com/dzgoq3ikq/image/upload/v1761118413/Screenshot_21-Oct_23-52-36_27881_dgu02f.png) | ![Screenshot 18](https://res.cloudinary.com/dzjxhzxym/image/upload/v1762096316/Screenshot_from_2025-11-02_20-37-38_tkb0vv.png) |
 
 ### Questions?
