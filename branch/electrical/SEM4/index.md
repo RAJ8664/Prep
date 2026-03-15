@@ -45,7 +45,7 @@
 
 ## 📚 Subjects
 
-_Core SEM 3 curriculum — Click to explore_
+_Core SEM 4 curriculum — Click to explore_
 
 </div>
 
