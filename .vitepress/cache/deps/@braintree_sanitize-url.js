@@ -23,7 +23,7 @@ var require_constants = __commonJS({
 var require_dist = __commonJS({
   "node_modules/@braintree/sanitize-url/dist/index.js"(exports) {
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.sanitizeUrl = void 0;
+    exports.sanitizeUrl = sanitizeUrl;
     var constants_1 = require_constants();
     function isRelativeUrlWithoutProtocol(url) {
       return constants_1.relativeFirstCharacters.indexOf(url[0]) > -1;
@@ -86,7 +86,6 @@ var require_dist = __commonJS({
       }
       return backSanitized;
     }
-    exports.sanitizeUrl = sanitizeUrl;
   }
 });
 export default require_dist();
