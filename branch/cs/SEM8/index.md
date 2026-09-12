@@ -43,6 +43,59 @@
 
 <div align="center">
 
+## 🆕 New Syllabus
+
+_Updated SEM 8 curriculum — Click to explore_
+
+</div>
+
+<div align="center">
+
+**🅰️ Category I — Students not opting for Job / Research Internship**
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|     Code      | Subject                                          |         Resources          |
+| :-----------: | :--------------------------------------------------- | :---------------------------: |
+| `DC4400Q-3`   | **Professional Breadth Course - 3** (`DC4400Q / MOOCS-N`) | [📂 Open](./DC4400Q-3/)   |
+| `DC4400Q-4`   | **Professional Breadth Course - 4** (`DC4400Q / MOOCS-N`) | [📂 Open](./DC4400Q-4/)   |
+| `CS46002`     | **Capstone Project**                              | [📂 Open](./CS46002/)     |
+| `CS45004`     | **Grand Viva Level - 2**                          | [📂 Open](./CS45004/)     |
+
+</div>
+
+</details>
+
+<div align="center">
+
+**🅱️ Category II — Students opting for Job / Research Internship**
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|    Code    | Subject                                        |        Resources         |
+| :--------: | :-------------------------------------------------- | :------------------------: |
+| `MOOCS-N`  | **Courses offered under SWAYAM and NPTEL**    | [📂 Open](./MOOCS-N/)  |
+| `CS45002`  | **Job/Research Internship**                    | [📂 Open](./CS45002/)  |
+| `CS45004`  | **Grand Viva Level - 2**                       | [📂 Open](./CS45004/)  |
+
+</div>
+
+</details>
+
+---
+
+<div align="center">
+
 ## 📚 Subjects
 
 _Core SEM 8 curriculum — Click to explore_

@@ -43,6 +43,37 @@
 
 <div align="center">
 
+## 🆕 New Syllabus
+
+_Updated SEM 5 curriculum — Click to explore_
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|    Code    | Subject                                    |        Resources         |
+| :--------: | :-------------------------------------------- | :------------------------: |
+| `MS31001`  | **Start-Up and IPR**                        | [📂 Open](./MS31001/)  |
+| `CS31001`  | **Computer Network**                        | [📂 Open](./CS31001/)  |
+| `CS31003`  | **Operating System**                        | [📂 Open](./CS31003/)  |
+| `CS31005`  | **Formal Language Automata Theory**         | [📂 Open](./CS31005/)  |
+| `CS31007`  | **Software Engineering**                    | [📂 Open](./CS31007/)  |
+| `CS3300X`  | **Professional Depth Course - 1**           | [📂 Open](./CS3300X/)  |
+| `CS32001`  | **Computer Network Lab**                    | [📂 Open](./CS32001/)  |
+| `CS32003`  | **Operating System Lab**                    | [📂 Open](./CS32003/)  |
+| `CS32005`  | **Multimedia Tools & Application Lab**      | [📂 Open](./CS32005/)  |
+
+</div>
+
+</details>
+
+---
+
+<div align="center">
+
 ## 📚 Subjects
 
 _Core SEM 5 curriculum — Click to explore_

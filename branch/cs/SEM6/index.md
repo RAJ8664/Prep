@@ -43,6 +43,37 @@
 
 <div align="center">
 
+## 🆕 New Syllabus
+
+_Updated SEM 6 curriculum — Click to explore_
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|     Code      | Subject                                        |         Resources          |
+| :-----------: | :------------------------------------------------ | :---------------------------: |
+| `MS31002`     | **Business Management**                         | [📂 Open](./MS31002/)     |
+| `CS31002`     | **Compiler Design**                             | [📂 Open](./CS31002/)     |
+| `CS31004`     | **Machine Learning**                            | [📂 Open](./CS31004/)     |
+| `CS3300Y-2`   | **Professional Depth Course - 2**               | [📂 Open](./CS3300Y-2/)   |
+| `CS3300Y-3`   | **Professional Depth Course - 3**               | [📂 Open](./CS3300Y-3/)   |
+| `DC3400Q`     | **Professional Breadth Course - 1**             | [📂 Open](./DC3400Q/)     |
+| `CS32002`     | **Compiler Design Lab**                         | [📂 Open](./CS32002/)     |
+| `CS32004`     | **Machine Learning Lab**                        | [📂 Open](./CS32004/)     |
+| `CS32006`     | **Object-Oriented Design and Analysis Lab**     | [📂 Open](./CS32006/)     |
+
+</div>
+
+</details>
+
+---
+
+<div align="center">
+
 ## 📚 Subjects
 
 _Core SEM 6 curriculum — Click to explore_

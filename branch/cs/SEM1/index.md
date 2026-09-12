@@ -43,6 +43,36 @@
 
 <div align="center">
 
+## 🆕 New Syllabus
+
+_Updated SEM 1 curriculum — Click to explore_
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|   Code    | Subject                                 |       Resources        |
+| :-------: | :--------------------------------------- | :---------------------: |
+| `MA11001` | **Algebra and Calculus**                 | [📂 Open](./MA11001/) |
+| `PH11001` | **Wave Mechanics and Optics**            | [📂 Open](./PH11001/) |
+| `CS11001` | **Programming and Data Structure**       | [📂 Open](./CS11001/) |
+| `HS11001` | **English for Technical Communication**  | [📂 Open](./HS11001/) |
+| `CS11003` | **Foundation of Data Science**           | [📂 Open](./CS11003/) |
+| `CE12001` | **Computer Aided Drawing & Graphics**    | [📂 Open](./CE12001/) |
+| `PH12001` | **Physics Lab**                          | [📂 Open](./PH12001/) |
+| `EA1700A` | **EAA Course**                           | [📂 Open](./EA1700A/) |
+
+</div>
+
+</details>
+
+---
+
+<div align="center">
+
 ## 📚 Subjects
 
 _Core SEM 1 curriculum — Click to explore_

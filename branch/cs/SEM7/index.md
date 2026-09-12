@@ -37,6 +37,35 @@
 
 <div align="center">
 
+## 🆕 New Syllabus
+
+_Updated SEM 7 curriculum — Click to explore_
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|     Code      | Subject                                           |         Resources          |
+| :-----------: | :--------------------------------------------------- | :---------------------------: |
+| `CS41001`     | **Computer Graphics**                              | [📂 Open](./CS41001/)     |
+| `CS4300X-4`   | **Professional Depth Course - 4** (`CS4300X / MOOCS-M`)   | [📂 Open](./CS4300X-4/)   |
+| `CS4300X-5`   | **Professional Depth Course - 5** (`CS4300X / MOOCS-M`)   | [📂 Open](./CS4300X-5/)   |
+| `DC4400P`     | **Professional Breadth Course - 2** (`DC4400P / MOOCS-M`) | [📂 Open](./DC4400P/)     |
+| `CS42001`     | **Computer Graphics Lab**                          | [📂 Open](./CS42001/)     |
+| `CS45001`     | **Summer/Winter Internship**                       | [📂 Open](./CS45001/)     |
+| `CS46001`     | **Major Project**                                  | [📂 Open](./CS46001/)     |
+
+</div>
+
+</details>
+
+---
+
+<div align="center">
+
 ## 📚 Subjects
 
 _Core SEM 7 curriculum — Click to explore_

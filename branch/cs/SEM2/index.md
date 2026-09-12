@@ -43,6 +43,37 @@
 
 <div align="center">
 
+## 🆕 New Syllabus
+
+_Updated SEM 2 curriculum — Click to explore_
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|   Code    | Subject                                                            |       Resources        |
+| :-------: | :------------------------------------------------------------------ | :---------------------: |
+| `MA11002` | **Numerical and Mathematical Methods for Differential Equations** | [📂 Open](./MA11002/) |
+| `CY11002` | **Engineering Chemistry**                                          | [📂 Open](./CY11002/) |
+| `ME11002` | **Engineering Mechanics**                                          | [📂 Open](./ME11002/) |
+| `EE11002` | **Electrical & Electronics Science**                               | [📂 Open](./EE11002/) |
+| `CS11004` | **Discrete Structure**                                             | [📂 Open](./CS11004/) |
+| `ME12002` | **Workshop Practice**                                              | [📂 Open](./ME12002/) |
+| `EE12002` | **Electrical & Electronics Science Lab**                           | [📂 Open](./EE12002/) |
+| `CY12002` | **Chemistry Lab**                                                  | [📂 Open](./CY12002/) |
+| `EA1700B` | **EAA Courses**                                                    | [📂 Open](./EA1700B/) |
+
+</div>
+
+</details>
+
+---
+
+<div align="center">
+
 ## 📚 Subjects
 
 _Core SEM 2 curriculum — Click to explore_

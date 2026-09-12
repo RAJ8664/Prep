@@ -43,6 +43,38 @@
 
 <div align="center">
 
+## 🆕 New Syllabus
+
+_Updated SEM 3 curriculum — Click to explore_
+
+</div>
+
+<details open>
+<summary><b>🔽 View All Subjects</b></summary>
+
+<div align="center">
+
+|    Code    | Subject                                      |        Resources         |
+| :--------: | :--------------------------------------------- | :------------------------: |
+| `MA21001`  | **Applied Mathematical Analysis and Statistics** | [📂 Open](./MA21001/)  |
+| `HS21001`  | **Engineering Economics**                      | [📂 Open](./HS21001/)  |
+| `CS21001`  | **Data Structures and Algorithms**             | [📂 Open](./CS21001/)  |
+| `CS21003`  | **Digital Logic and Microprocessor**           | [📂 Open](./CS21003/)  |
+| `CS21005`  | **Object-Oriented Programming**                | [📂 Open](./CS21005/)  |
+| `CS21007`  | **Introduction to Data Communication**         | [📂 Open](./CS21007/)  |
+| `CS22001`  | **Data Structures and Algorithms Lab**         | [📂 Open](./CS22001/)  |
+| `CS22003`  | **Digital Logic and Microprocessor Lab**       | [📂 Open](./CS22003/)  |
+| `CS22005`  | **Computational Tools and Programming Lab**    | [📂 Open](./CS22005/)  |
+| `EA2700A`  | **EAA Courses**                                | [📂 Open](./EA2700A/)  |
+
+</div>
+
+</details>
+
+---
+
+<div align="center">
+
 ## 📚 Subjects
 
 _Core SEM 3 curriculum — Click to explore_
